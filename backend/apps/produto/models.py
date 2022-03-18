@@ -24,14 +24,14 @@ class ProdutoEletrInf(models.Model):
     # O site em que esse produto foi encontrado (pichau,
     # kabum e etc) O verbose_name muda o nome que aparece
     # esse campo ao ve-lo no admin.
-    plataforma = models.CharField(verbose_name="website", max_length=100)
+    plataforma = models.CharField(verbose_name="Site", max_length=100)
     # Armazena a data e o horário exato em que esse modelo
     # foi criado. (Atualizações futuras contam como edição)
-    data_criacao = models.DateTimeField(auto_now_add=True)
+    data_criacao = models.DateTimeField(auto_now_add=True, verbose_name="Data de criação")
     # Marca se esse produto deve ser monitorado ou não.
     # Para pode desativar monitoramento de produtos que
     # não importam. Padrão é True (Sim).
-    monitorar = models.BooleanField(default=True)
+    monitorar = models.BooleanField(default=True, verbose_name="Monitorar")
 
     # Retorna o que deve aparecer para identificar esse
     # produto ao retornar uma busca.
