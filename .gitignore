@@ -1,0 +1,8 @@
+*.pyc
+*~
+__pycache__
+.idea/
+env/
+db.sqlite3
+backend/static
+.DS_Store
