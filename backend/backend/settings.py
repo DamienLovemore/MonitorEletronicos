@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'apps.produto',
     'apps.helpers',
+    'apps.monitor',
+    'apps.monitor.kabum'
 ]
 
 MIDDLEWARE = [

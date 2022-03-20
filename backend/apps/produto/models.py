@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.safestring import mark_safe
 
 # -------------------------------------------------------
 # Django automaticamente cria um campo id. Que é inteiro,
@@ -28,10 +29,35 @@ class ProdutoEletrInf(models.Model):
     # Armazena a data e o horário exato em que esse modelo
     # foi criado. (Atualizações futuras contam como edição)
     data_criacao = models.DateTimeField(auto_now_add=True, verbose_name="Data de criação")
+    # Para produtos de restock, é usado para verificar
+    # quando um produto importante não tinha estoque e
+    # passa a ter para notificar no bot.
+    # (identificado pela plataforma = nomesite_restock)
+    tem_estoque = models.BooleanField(default=True, verbose_name="Estoque disponível")
+    # Campo usado apenas pelos scripts de ofertas, para
+    # que ele possa ver caso tenha um desconto diferente
+    # do que tinha cadastrado para um mesmo produto, para
+    # que ele possa notificar.
+    # (blank=True, null=True - Campo não obrigatório)
+    perc_desconto = models.FloatField(verbose_name="Porcentagem Desconto", blank=True, null=True)
     # Marca se esse produto deve ser monitorado ou não.
     # Para pode desativar monitoramento de produtos que
     # não importam. Padrão é True (Sim).
+    # (Afeta monitoramento de histórico de preços, e
+    # restock)
     monitorar = models.BooleanField(default=True, verbose_name="Monitorar")
+
+    # Função responsável por carregar a imagem para ser
+    # exibida no painel admin
+    def imagem_produto(self):
+        # Se tiver valor no campo imagem, prossegue
+        # em carregar a imagem
+        if self.imagem:
+            # Carrega a tag html da imagem carregando
+            # a url cadastrada
+            return mark_safe('<img src="%s" style="width: 90px; height: 90px;" />' % self.imagem)
+        else:
+            return "Imagem não encontrada"
 
     # Retorna o que deve aparecer para identificar esse
     # produto ao retornar uma busca.

@@ -6,7 +6,7 @@ class Logger:
     def __init__(self, filename=None, logger_name=None, debug=None, rotation=None):
         time_now = datetime.now().strftime('%Y%m%d')
 
-        dir = os.path.join("backend/logs")
+        dir = os.path.join("logs")
         self.filename = "./{}/{}_{}.log".format(dir, time_now, filename)
 
         self.logger_name = logger_name if logger_name else filename
