@@ -15,10 +15,10 @@ class ProdutoEletrInfAdmin(admin.ModelAdmin):
     model = ProdutoEletrInf
     # Campos que devem apenas ser vistos, e não
     # alterados no painel admin.
-    readonly_fields = ("plataforma", "data_criacao", "tem_estoque", "perc_desconto")
+    readonly_fields = ("id", "plataforma", "data_criacao", "tem_estoque", "perc_desconto")
     # Campos que podem ser mostrados ao olhar
     # por esse modelo no painel admin.
-    list_display = ("nome", "imagem_produto", "url_produto", "plataforma", "data_criacao", "tem_estoque", "perc_desconto", "monitorar")
+    list_display = ("id", "nome", "imagem_produto", "url_produto", "plataforma", "data_criacao", "tem_estoque", "perc_desconto", "monitorar")
     # Campos que podem ser usados para filtrar
     # resultados encontrados na busca.
     list_filter = ("monitorar", "plataforma", "data_criacao", "perc_desconto")
