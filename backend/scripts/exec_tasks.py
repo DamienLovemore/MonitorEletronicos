@@ -1,4 +1,4 @@
-import continuous_threading
+import continuous_threading, threading
 from time import sleep
 
 #Kabum
@@ -6,6 +6,7 @@ from apps.monitor.kabum.novidades.kabum_novidades_games import KabumNovidadesGam
 from apps.monitor.kabum.novidades.kabum_novidades_hardware import KabumNovidadesHardware
 from apps.monitor.kabum.novidades.kabum_novidades_computadores import KabumNovidadesComputadores
 from apps.monitor.kabum.novidades.kabum_novidades_smartphones import KabumNovidadesSmartphones
+from apps.monitor.kabum.hist_precos.kabum_hist_precos import KabumHistPrecos
 
 # ---------------------------------------------------------------------------
 # Arquivo responsável por rodar todos os bots de cada canal do Discord a cada
@@ -38,6 +39,10 @@ def task_kabum_novidades_smartphones():
         kabum_novidades_smartphones.get_items()
         sleep(8)
 
+def task_kabum_monitorar_precos():
+    kabum_monitor_precos = KabumHistPrecos()
+    kabum_monitor_precos.get_items()
+
 def run():
     # continuous_threading é uma biblioteca especializa em rodar threads
     # continuamente. Ela possue por padrão diversos recursos, e ferramentas
@@ -45,7 +50,14 @@ def run():
     # encerrar as tasks seus recursos sejam liberados corretamente.
 
     ### Kabum ###
+
+    # -> Novidades
     continuous_threading.Thread(target=task_kabum_novidades_games).start()
     continuous_threading.Thread(target=task_kabum_novidades_hardware).start()
     continuous_threading.Thread(target=task_kabum_novidades_computadores).start()
     continuous_threading.Thread(target=task_kabum_novidades_smartphones).start()
+
+    # -> Monitorar Preços
+    # Como deve rodar uma vez só por dia, usado o threading normal
+    # já que não será uma tarefa continua.
+    threading.Thread(target=task_kabum_monitorar_precos).start()

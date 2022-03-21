@@ -29,10 +29,10 @@ class ProdutoEletrInfAdmin(admin.ModelAdmin):
 
 class PrecoInfAdmin(admin.ModelAdmin):
     model = PrecoInf
-    readonly_fields = ("produto_referencia", "data_preco")
-    list_display = ("produto_referencia", "valor", "data_preco")
-    list_filter = ("data_preco", "valor")
-    search_fields = ("produto_referencia", "data_preco")
+    readonly_fields = ("id", "produto_referencia", "data_preco")
+    list_display = ("id", "produto_referencia", "valor", "data_preco")
+    list_filter = ("produto_referencia", "data_preco")
+    search_fields = ("valor", "data_preco")
 
 
 # Liga as nossas configurações do painel admin a esta classe.

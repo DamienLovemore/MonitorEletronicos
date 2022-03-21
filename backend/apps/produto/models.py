@@ -105,4 +105,4 @@ class PrecoInf(models.Model):
         # Tudo em uma linha por performance. (Se tivesse
         # milhares de linha ia armazenar o retorno de
         # cada um em uma variavel só pra apagar depois
-        return f"{self.produto_referencia} - R${self.valor}({self.data_preco})"
+        return f"{self.produto_referencia} - {self.valor}({self.data_preco})"
