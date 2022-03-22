@@ -1,4 +1,4 @@
-import os
+import os, threading
 from datetime import datetime, date
 
 import requests
@@ -68,6 +68,12 @@ class KabumHistPrecos:
                 # Se não achou o preço, e esse produto tem estoque
                 # Então disparar um  erro
                 if formulario_sem_estoque is None:
+                    # Marca que o produto não existe mais, para ser
+                    # removido
+                    titulo_pagina = str(page_content.find("title").next_element)
+                    if titulo_pagina == "404 - Página não encontrada":
+                        product_price = -1
+
                     raise Exception("Não achou preço, mas também não pode confirmar que ele não tem estoque")
 
         # Se aconteceu algum erro ao pegar os dados, então loga isso.
@@ -139,6 +145,9 @@ class KabumHistPrecos:
         # (Se ele conseguiu pegar o preço atual)
         if preco_atual is not None:
             self.criar_modelos(preco_atual, produto)
+        # Se o produto não existe mais, apaga ele
+        elif preco_atual == -1:
+            produto.delete()
 
     # Função responsável pelo scraping, e por chamar as outras
     # funções que fazem o resto que precisa com esses dados
@@ -165,12 +174,12 @@ class KabumHistPrecos:
                     # Se o último preço foi pego em um dia antes de hoje,
                     # ele deve registrar o preço desse produto hoje
                     if ultimo_preco.data_preco.date() < date.today():
-                        self.registrar_preco_hoje(produto)
+                        threading.Thread(target=self.registrar_preco_hoje, args=(produto,)).start()
 
                 # Caso ainda não tenha nenhum preço cadastrado para esse
                 # produto
                 except PrecoInf.DoesNotExist:
-                    self.registrar_preco_hoje(produto)
+                    threading.Thread(target=self.registrar_preco_hoje, args=(produto,)).start()
 
         self.log.info("Fim da procura por nas páginas dos produtos de de kabum_novidades\n")
 

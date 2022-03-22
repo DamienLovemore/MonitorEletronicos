@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.functional import cached_property
 from django.utils.safestring import mark_safe
 
 # -------------------------------------------------------
@@ -15,12 +16,12 @@ class ProdutoEletrInf(models.Model):
     class Meta:
         db_table = "produto"
 
-    # Armazena o nome do produto (máximo 100 caracteres)
-    nome = models.CharField(max_length=100)
+    # Armazena o nome do produto
+    nome = models.TextField()
     # url da imagem desse produto
-    imagem = models.CharField(max_length=255)
-    # url do produto, mas com TextField pois ele não tem
-    # limite de caracteres como o CharField
+    imagem = models.TextField()
+    # url do produto (TextField pois ele não tem
+    # limite de caracteres como o CharField)
     url_produto = models.TextField()
     # O site em que esse produto foi encontrado (pichau,
     # kabum e etc) O verbose_name muda o nome que aparece
@@ -49,6 +50,7 @@ class ProdutoEletrInf(models.Model):
 
     # Função responsável por carregar a imagem para ser
     # exibida no painel admin
+    @cached_property
     def imagem_produto(self):
         # Se tiver valor no campo imagem, prossegue
         # em carregar a imagem
