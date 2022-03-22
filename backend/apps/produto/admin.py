@@ -15,13 +15,13 @@ class ProdutoEletrInfAdmin(admin.ModelAdmin):
     model = ProdutoEletrInf
     # Campos que devem apenas ser vistos, e não
     # alterados no painel admin.
-    readonly_fields = ("plataforma", "data_criacao")
+    readonly_fields = ("id", "plataforma", "data_criacao", "tem_estoque", "perc_desconto")
     # Campos que podem ser mostrados ao olhar
     # por esse modelo no painel admin.
-    list_display = ("nome", "imagem", "url_produto", "plataforma", "data_criacao", "monitorar")
+    list_display = ("id", "nome", "imagem_produto", "url_produto", "plataforma", "data_criacao", "tem_estoque", "perc_desconto", "monitorar")
     # Campos que podem ser usados para filtrar
     # resultados encontrados na busca.
-    list_filter = ("monitorar", "plataforma", "data_criacao")
+    list_filter = ("monitorar", "plataforma", "data_criacao", "perc_desconto")
     # Os campos desse modelo (tabela) que podem ser
     # usados para pesquisar por esse modelo.
     # (Nome dele, e o site que foi encontrado)
@@ -29,10 +29,10 @@ class ProdutoEletrInfAdmin(admin.ModelAdmin):
 
 class PrecoInfAdmin(admin.ModelAdmin):
     model = PrecoInf
-    readonly_fields = ("produto_referencia", "data_preco")
-    list_display = ("produto_referencia", "valor", "data_preco")
-    list_filter = ("data_preco", "valor")
-    search_fields = ("produto_referencia", "data_preco")
+    readonly_fields = ("id", "produto_referencia", "data_preco")
+    list_display = ("id", "produto_referencia", "valor", "data_preco")
+    list_filter = ("produto_referencia", "data_preco")
+    search_fields = ("valor", "data_preco")
 
 
 # Liga as nossas configurações do painel admin a esta classe.
