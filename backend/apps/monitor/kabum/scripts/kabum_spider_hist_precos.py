@@ -11,6 +11,12 @@ from apps.produto.models import ProdutoEletrInf, PrecoInf
 from apps.helpers.logs import Logger
 
 
+# -----------------------------------------------------------------
+# Arquivo reponsável por uma vez por dia olhar na página de cada
+# produto, e registrar o preço daquele produto naquele dia no
+# banco de dados.
+# -----------------------------------------------------------------
+
 class KabumHistPrecos:
     def __init__(self):
         # A classe responsável por logar o precesso de obtenção
@@ -132,8 +138,6 @@ class KabumHistPrecos:
 
             self.log.warning(
                 "Preços duplicados do banco foram apagados com sucesso! (Somente o primeiro que foi encontrado foi mantido)\n")
-
-        self.log.info("Criação de modelo foi feita")
 
     # Função responsável por registrar o preço desse produto hoje
     def registrar_preco_hoje(self, produto):

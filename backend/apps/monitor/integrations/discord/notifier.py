@@ -87,13 +87,29 @@ class DiscordNotify:
             # Adiciona o conteúdo da mensagem, a classe
             # responsável por enviar a mensagem
             self.webhook.add_embed(message_content)
+        # Notificar oferta (desconto)
+        elif self.tipo_notificacao == 2:
+            message_content = DiscordEmbed(self.item["nome"].upper(), color=self.color)
 
-            # Execute manda o conteúdo da mensagem ligada
-            # a esse webhook em seu canal que foi
-            # especificado.
-            # (Posição 0 guarda o status da requsição, se
-            # for 200 deu certo)
-            status_message_sent = self.webhook.execute()
-            status_message_sent = status_message_sent.status_code
+            message_content.set_thumbnail(url=self.item["imagem"])
 
-            return status_message_sent
+            message_content.add_embed_field(name="Produto:",
+                                            value=(f"[{self.item['nome']}]({self.item['url_produto']})"), inline=False)
+
+            message_content.add_embed_field(name="Valor:", value=self.item["preco"], inline=False)
+
+            message_content.add_embed_field(name="Porcentagem Desconto:", value=f"{self.item['perc_desconto']}%", inline=False)
+
+            message_content.add_embed_field(name="Unidades restantes:", value=self.item["estoque_disponivel"], inline=False)
+
+            self.webhook.add_embed(message_content)
+
+        # Execute manda o conteúdo da mensagem ligada
+        # a esse webhook em seu canal que foi
+        # especificado.
+        # (Posição 0 guarda o status da requsição, se
+        # for 200 deu certo)
+        status_message_sent = self.webhook.execute()
+        status_message_sent = status_message_sent.status_code
+
+        return status_message_sent
