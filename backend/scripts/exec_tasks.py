@@ -14,6 +14,7 @@ from apps.monitor.pichau.novidades.pichau_novidades_hardware import PichauNovida
 from apps.monitor.pichau.novidades.pichau_novidades_perifericos import PichauNovidadesPerifericos
 from apps.monitor.pichau.novidades.pichau_novidades_computadores import PichauNovidadesComputadores
 from apps.monitor.pichau.novidades.pichau_novidades_notebooks import PichauNovidadesNotebooks
+from apps.monitor.pichau.hist_precos.pichau_hist_precos import PichauHistPrecos
 
 # ---------------------------------------------------------------------------
 # Arquivo responsável por rodar todos os bots de cada canal do Discord a cada
@@ -84,6 +85,14 @@ def task_pichau_novidades_notebooks():
         pichau_novidades_notebooks.get_items()
         sleep(60)
 
+def task_pichau_monitorar_precos():
+    # Tempo suficiente das task de novidades, e ofertas terem feito scraping
+    # e criado seus modelos. Para que não de interferencia com esse.
+    # (Pois faz muita requisicao, e uso do banco)
+    sleep(20)
+    pichau_monitor_precos = PichauHistPrecos()
+    pichau_monitor_precos.get_items()
+
 def run():
     # continuous_threading é uma biblioteca especializa em rodar threads
     # continuamente. Ela possue por padrão diversos recursos, e ferramentas
@@ -106,10 +115,13 @@ def run():
     # já que não será uma tarefa continua.
     threading.Thread(target=task_kabum_monitorar_precos).start()
 
-    ### Kabum ###
+    ### Pichau ###
 
     # -> Novidades
     continuous_threading.Thread(target=task_pichau_novidades_hardware).start()
     continuous_threading.Thread(target=task_pichau_novidades_perifericos).start()
     continuous_threading.Thread(target=task_pichau_novidades_computadores).start()
     continuous_threading.Thread(target=task_pichau_novidades_notebooks).start()
+
+    # -> Monitorar Preços
+    threading.Thread(target=task_pichau_monitorar_precos).start()
