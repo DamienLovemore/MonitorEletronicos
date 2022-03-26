@@ -29,3 +29,14 @@ url_kabum_ofertas = "https://www.kabum.com.br/destaques?page_number=1&page_size=
 # -> Restock
 keywords_kabum_restock = ["gamer", "notebook", "computador", "placa-de-video", "processador", "nvidia", "rtx", "amd",
                           "apple", "smartphone", "nintendo", "gtx", "intel-core"]
+
+### PICHAU ###
+
+# -> Novidades
+webhook_pichau_novidades = "https://discord.com/api/webhooks/957244975484125224/t_iHYegCznduC4t6wyKDwzooW3AnYSxqTHoYf7I-u9pSlTf4vZ8J0adHL2Xbrj391sj9"
+url_pichau_novidades_hardware = "https://www.pichau.com.br/hardware"
+url_pichau_novidades_perifericos = "https://www.pichau.com.br/perifericos"
+url_pichau_novidades_computadores = "https://www.pichau.com.br/computadores"
+url_pichau_novidades_notebooks = "https://www.pichau.com.br/notebooks"
+keywords_pichau_restock = ["placa-de-video", "rtx", "gtx", "amd", "processador", "gamer", "notebook", "ssd", "razer",
+                           "ryzen", "intel"]

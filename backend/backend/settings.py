@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'apps.produto',
     'apps.helpers',
     'apps.monitor',
-    'apps.monitor.kabum'
+    'apps.monitor.kabum',
+    'apps.monitor.pichau'
 ]
 
 MIDDLEWARE = [

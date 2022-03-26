@@ -29,6 +29,8 @@ class DiscordNotify:
             # Código Hexadecimal para identificar cor
             # Exemplo: #0061b1 -> 0x0061b1 (Cor Azul)
             self.color = 0x0061b1
+        elif plataforma == "pichau":
+            self.color = 0xe90313
         # Se for uma loja desconhecida, coloca como cor
         # da mensagem preto.
         else:
