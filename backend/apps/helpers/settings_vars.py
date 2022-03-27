@@ -12,7 +12,11 @@ webhook_canal_testes = "https://discord.com/api/webhooks/954793840865329172/GIFc
 ### KABUM ###
 
 # -> Novidades
-webhook_kabum_novidades = "https://discord.com/api/webhooks/955057968515276812/Aq8CM42XGzAHyD_Wj07WOMUEK5lhUB7yOfe3K-ignpdyb_KRnJmbd3KBhgLlThV0CPGA"
+webhook_kabum_novidades_games = "https://discord.com/api/webhooks/957706957920276550/Oxz4qHIzoaIY20VcBBdKkLGOHFBNmS7X3lIKReILl9-Gsl1So_bYNYIGrbNXuqqk-12T"
+webhook_kabum_novidades_smartphones = "https://discord.com/api/webhooks/957707315224649768/VR-nXJNIDAP_ZvrlFdld0DD0Xvyh8pndIwskzebkyrALb5wgMiL7ToBaIU46zd8BxNon"
+webhook_kabum_novidades_computadores = "https://discord.com/api/webhooks/957707815349264447/tUUl0mcpXj1SBLOB_8SuPnXUaZxaYmoRffbvTcK0gRVtgx7Zzoey8evMGEB5C0HX1GSA"
+webhook_kabum_novidades_hardware = "https://discord.com/api/webhooks/957708051639574568/FNIPMqyjnK_ArpcvLI15NjGLbVd1siqKpogt2aVY09n_V7cK-Qm7Z-8OjFLHXxw9V5Xl"
+
 url_kabum_novidades_games = "https://www.kabum.com.br/gamer?page_number={}&page_size=100&facet_filters=&sort=-date_product_arrived"
 url_kabum_novidades_smartphones = "https://www.kabum.com.br/celular-smartphone?page_number={}&page_size=100&facet_filters=&sort=-date_product_arrived"
 url_kabum_novidades_computadores = "https://www.kabum.com.br/computadores?page_number={}&page_size=100&facet_filters=&sort=-date_product_arrived"

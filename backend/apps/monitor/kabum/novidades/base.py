@@ -3,7 +3,7 @@ from time import sleep
 from bs4 import BeautifulSoup
 
 from apps.produto.models import ProdutoEletrInf
-from apps.helpers.settings_vars import webhook_kabum_novidades, keywords_kabum_restock
+from apps.helpers.settings_vars import keywords_kabum_restock
 from apps.monitor.integrations.discord.notifier import DiscordNotify
 
 # -----------------------------------------------------------------
@@ -13,13 +13,13 @@ from apps.monitor.integrations.discord.notifier import DiscordNotify
 # -----------------------------------------------------------------
 
 class KabumNovidades:
-    def __init__(self, log):
+    def __init__(self, log, discord_webhook: str):
         # Guarda a referência da classe que vai ser responsável por
         # registrar as operações feitas
         self.log = log
         # A url do webhook que aponta para o canal onde deve ser
         # mandado essa notificação
-        self.url_discord = webhook_kabum_novidades
+        self.url_discord = discord_webhook
         # O tipo de notificação que será mandada.
         # (1 - Novidades, 2 - Ofertas e 3 - Restock)
         self.tipo_notificacao = 1

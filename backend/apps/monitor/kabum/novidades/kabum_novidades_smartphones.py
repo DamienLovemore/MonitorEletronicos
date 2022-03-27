@@ -1,7 +1,7 @@
 import os
 from datetime import datetime
 
-from apps.helpers.settings_vars import url_kabum_novidades_smartphones
+from apps.helpers.settings_vars import webhook_kabum_novidades_smartphones, url_kabum_novidades_smartphones
 from apps.helpers.logs import Logger
 
 from apps.monitor.kabum.novidades.base import KabumNovidades
@@ -21,7 +21,7 @@ class KabumNovidadesSmartphones:
         self.log = Logger(filename=os.path.basename(__file__))
         # A classe que faz todo o processo de scraping, criação
         # de modelos e notificação no Discord.
-        self.novidades = KabumNovidades(log=self.log)
+        self.novidades = KabumNovidades(self.log, webhook_kabum_novidades_smartphones)
 
     # Faz tudo o que precisa fazer, e no final loga o
     # tempo
