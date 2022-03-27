@@ -22,18 +22,24 @@ def indentificar_categoria_produto(url_produto: str):
     for kw in keywords_hardware:
         if kw in url_produto:
             categoria = "hardware"
+            # Assim que verificar que se enquadra nessa categoria, já retorna.
+            # Para acelerar o processo, e não ter que olhar todos os outros.
+            return categoria
 
     for kw in keywords_perifericos:
         if kw in url_produto:
             categoria = "perifericos"
+            return categoria
 
     for kw in keywords_computadores:
         if kw in url_produto:
             categoria = "computadores"
+            return categoria
 
     for kw in keywords_notebooks:
         if kw in url_produto:
             categoria = "notebooks"
+            return categoria
 
     # Caso não se enquadrar em nada, retorna a url como
     # periférico.(Que é o mais genérico)
