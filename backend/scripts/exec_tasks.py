@@ -14,6 +14,8 @@ from apps.monitor.pichau.novidades.pichau_novidades_hardware import PichauNovida
 from apps.monitor.pichau.novidades.pichau_novidades_perifericos import PichauNovidadesPerifericos
 from apps.monitor.pichau.novidades.pichau_novidades_computadores import PichauNovidadesComputadores
 from apps.monitor.pichau.novidades.pichau_novidades_notebooks import PichauNovidadesNotebooks
+from apps.monitor.pichau.novidades.pichau_novidades_api import PichauNovidadesAPI
+from apps.monitor.pichau.ofertas.pichau_ofertas import PichauOfertas
 from apps.monitor.pichau.hist_precos.pichau_hist_precos import PichauHistPrecos
 
 # ---------------------------------------------------------------------------
@@ -85,6 +87,18 @@ def task_pichau_novidades_notebooks():
         pichau_novidades_notebooks.get_items()
         sleep(60)
 
+def task_pichau_novidades_api():
+    pichau_novidades_api = PichauNovidadesAPI()
+    while True:
+        pichau_novidades_api.get_items()
+        sleep(60)
+
+def task_pichau_ofertas():
+    pichau_ofertas = PichauOfertas()
+    while True:
+        pichau_ofertas.get_items()
+        sleep(100)
+
 def task_pichau_monitorar_precos():
     # Tempo suficiente das task de novidades, e ofertas terem feito scraping
     # e criado seus modelos. Para que não de interferencia com esse.
@@ -122,6 +136,10 @@ def run():
     continuous_threading.Thread(target=task_pichau_novidades_perifericos).start()
     continuous_threading.Thread(target=task_pichau_novidades_computadores).start()
     continuous_threading.Thread(target=task_pichau_novidades_notebooks).start()
+    continuous_threading.Thread(target=task_pichau_novidades_api).start()
+
+    # -> Ofertas
+    continuous_threading.Thread(target=task_pichau_ofertas).start()
 
     # -> Monitorar Preços
     threading.Thread(target=task_pichau_monitorar_precos).start()
