@@ -37,7 +37,11 @@ keywords_kabum_restock = ["gamer", "notebook", "computador", "placa-de-video", "
 ### PICHAU ###
 
 # -> Novidades
-webhook_pichau_novidades = "https://discord.com/api/webhooks/957244975484125224/t_iHYegCznduC4t6wyKDwzooW3AnYSxqTHoYf7I-u9pSlTf4vZ8J0adHL2Xbrj391sj9"
+webhook_pichau_novidades_hardware = "https://discord.com/api/webhooks/957713864143798334/-QSRaEVBpnCw2zHjLf1yBrlaRZcBmr7UQaocXRCiUEHbPtYb3KLDvyso6Fgrsc11DMOT"
+webhook_pichau_novidades_perifericos = "https://discord.com/api/webhooks/957714048894513222/T4RH2Hb_bhgDlIsj40vcf201BD7Vv0oF4oMrRAYU4JbprtrC58lUZAVy8jihlHJnTJz-"
+webhook_pichau_novidades_computadores = "https://discord.com/api/webhooks/957714200355020813/cy2D-7dp8UAHoCbRgz_7k8dG_c4uORAqEdExhHyfCoRCk45k6EfKutX3Vv1tgFNi74-_"
+webhook_pichau_novidades_notebooks = "https://discord.com/api/webhooks/957714337911410748/cM5NYwLPZLdH8b332YclbBCrd5Y0YDa3fwBoV6qL4yrxSa_8FTeTN65Z3XLzHj0DUAXg"
+
 url_pichau_novidades_hardware = "https://www.pichau.com.br/hardware"
 url_pichau_novidades_perifericos = "https://www.pichau.com.br/perifericos"
 url_pichau_novidades_computadores = "https://www.pichau.com.br/computadores"

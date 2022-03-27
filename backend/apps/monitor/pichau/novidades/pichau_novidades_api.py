@@ -5,9 +5,13 @@ from time import sleep
 import requests
 
 from apps.produto.models import ProdutoEletrInf
-from apps.helpers.settings_vars import webhook_pichau_novidades, keywords_pichau_restock, url_pichau_novidades_api
+from apps.helpers.settings_vars import webhook_pichau_novidades_hardware, webhook_pichau_novidades_perifericos, \
+    webhook_pichau_novidades_computadores, webhook_pichau_novidades_notebooks, keywords_pichau_restock, \
+    url_pichau_novidades_api
+from apps.helpers.utilities import indentificar_categoria_produto
 from apps.helpers.logs import Logger
 from apps.monitor.integrations.discord.notifier import DiscordNotify
+
 
 # -----------------------------------------------------------------
 # Arquivo responável por fazer o scraping na API de novidades/
@@ -19,9 +23,6 @@ class PichauNovidadesAPI:
         # A classe responsável por logar o precesso de obtenção
         # dos dados. (Para verificar depois se está funcionando)
         self.log = Logger(filename=os.path.basename(__file__))
-        # A url do webhook que aponta para o canal onde deve ser
-        # mandado essa notificação
-        self.url_discord = webhook_pichau_novidades
         # O tipo de notificação que será mandada.
         # (1 - Novidades, 2 - Ofertas e 3 - Restock)
         self.tipo_notificacao = 1
@@ -278,9 +279,22 @@ class PichauNovidadesAPI:
     # (No nosso servidor Discord)
     def notificar_discord(self, item_notificar):
         try:
+            # Pega qual canal pertence o produto, para
+            # notificar no canal certo.
+            categoria_produto = indentificar_categoria_produto(item_notificar["url_produto"])
+
+            if categoria_produto == "hardware":
+                url_discord = webhook_pichau_novidades_hardware
+            elif categoria_produto == "perifericos":
+                url_discord = webhook_pichau_novidades_perifericos
+            elif categoria_produto == "computadores":
+                url_discord = webhook_pichau_novidades_computadores
+            else:
+                url_discord = webhook_pichau_novidades_notebooks
+
             # Cria a classe responsável por mandar a mensagem,
             # passando o conteúdo a ser notificado,
-            notificador_discord = DiscordNotify(item_notificar, self.url_discord, self.tipo_notificacao, self.loja)
+            notificador_discord = DiscordNotify(item_notificar, url_discord, self.tipo_notificacao, self.loja)
 
             # Manda a mensagem de fato
             notificador_discord.send_message()

@@ -1,7 +1,7 @@
 import os
 from datetime import datetime
 
-from apps.helpers.settings_vars import url_pichau_novidades_notebooks
+from apps.helpers.settings_vars import webhook_pichau_novidades_notebooks, url_pichau_novidades_notebooks
 from apps.helpers.logs import Logger
 
 from apps.monitor.pichau.novidades.base import PichauNovidades
@@ -20,7 +20,7 @@ class PichauNovidadesNotebooks:
         self.log = Logger(filename=os.path.basename(__file__))
         # A classe que faz todo o processo de scraping, criação
         # de modelos e notificação no Discord.
-        self.novidades = PichauNovidades(log=self.log)
+        self.novidades = PichauNovidades(self.log, webhook_pichau_novidades_notebooks)
 
     # Faz tudo o que precisa fazer, e no final loga o
     # tempo
