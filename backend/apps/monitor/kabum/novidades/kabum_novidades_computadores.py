@@ -8,8 +8,8 @@ from apps.monitor.kabum.novidades.base import KabumNovidades
 
 # -----------------------------------------------------------------
 # Arquivo responável por fazer o scraping da página de novidades na
-# Kabum na categoria de celulares e smartphones, e apitar produtos
-# novos encontrados.
+# Kabum na categoria de computadores(notebooks também), e apitar
+# produtos novos encontrados.
 # -----------------------------------------------------------------
 
 class KabumNovidadesComputadores:

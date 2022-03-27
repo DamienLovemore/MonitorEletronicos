@@ -8,7 +8,7 @@ from apps.monitor.kabum.novidades.base import KabumNovidades
 
 # -----------------------------------------------------------------
 # Arquivo responável por fazer o scraping da página de novidades na
-# Kabum na categoria de games, e apitar produtos novos encontrados.
+# Kabum na categoria de hardware, e apitar produtos novos encontrados.
 # -----------------------------------------------------------------
 
 class KabumNovidadesHardware:
